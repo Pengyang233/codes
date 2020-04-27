@@ -1,5 +1,5 @@
-function [acc, eer, far, frr] = metrics[score, test_num, train_num, class_num]
-% 功能：计算EER，ACC，FAR（向量），FRR（向量）
+function [ACC, EER, FAR, FRR] = metrics(score, test_num, train_num, class_num)
+% 功能：计算ACC，EER，FAR（向量），FRR（向量）
 % 输出即为计算的结果
 % 输入：
 %   @score：用算法计算的得分矩阵，每个元素的值在[0,1]，尺寸为[test_num*class_num, train_num*class_num]
@@ -23,7 +23,7 @@ function [acc, eer, far, frr] = metrics[score, test_num, train_num, class_num]
         matrix = flag((sampleID-1)*test_num+1:(sampleID-1)*test_num+test_num, (sampleID-1)*train_num+1:(sampleID-1)*train_num+train_num);
         num = num+size(nonzeros(matrix), 1);
     end
-    recognition = num/class_num*test_num;  %确认一下，这里应该是test num吗？
+    ACC = num/(class_num*test_num);  %确认一下，这里应该是test num吗？
 
     %% Calculate EER
     s = 0;
